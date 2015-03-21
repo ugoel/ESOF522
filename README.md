@@ -3,7 +3,7 @@ Understanding the Influence of Conference Acceptance Rate on Citation Count
 
 Run the code as follows:
 ==========================
-python scholar.py -c 900 --pub <conference_name> --after <after_year> --before <before_year> --json
+python scholar.py -c 900 --pub "conference_name" --after "after_year" --before "before_year" --json
 
 Sample Query:
 ===========================
