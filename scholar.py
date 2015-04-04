@@ -944,7 +944,7 @@ def json(querier, jsonp=None):
     if jsonp:
         print(encode(jsonp+'('+result+');'))
     else:
-        os_cmd = 'echo "' + str(encode(result)).replace("\n", " ").replace('\"', '\\"') + '" > tier-1/' + str(int(round(time.time() * 1000))) + '.json'
+        os_cmd = 'echo "' + str(encode(result)).replace("\n", " ").replace('\"', '\\"') + '" > A/' + str(int(round(time.time() * 1000))) + '.json'
         print(os_cmd)
         os.popen(os_cmd)
         #print(encode(result))
@@ -1094,6 +1094,8 @@ scholar.py -c 5 -a "albert einstein" -t --none "quantum theory" --after 1970"""
 
     index_loop = 0
     while (index_loop <= int(math.ceil(total_number_of_results/20.0) - 1) * 20):
+        print "Waiting for 5 seconds....."
+        time.sleep(5)
         index = index_loop
         query.set_start(index)
 
