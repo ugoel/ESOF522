@@ -173,7 +173,7 @@ class ScholarConf(object):
 
     # USER_AGENT = 'Mozilla/5.0 (X11; U; FreeBSD i386; en-US; rv:1.9.2.9) Gecko/20100913 Firefox/3.6.9'
     # Let's update at this point (3/14):
-    USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64; rv:27.0) Gecko/20100101 Firefox/27.0'
+    USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.104 Safari/537.36'
 
     # If set, we will use this file to read/save cookies to enable
     # cookie use across sessions.
@@ -759,7 +759,6 @@ class ScholarQuerier(object):
         self.articles = []
         self.query = None
         self.cjar = MozillaCookieJar()
-
         # If we have a cookie file, load it:
         if ScholarConf.COOKIE_JAR_FILE and \
            os.path.exists(ScholarConf.COOKIE_JAR_FILE):
@@ -771,7 +770,7 @@ class ScholarQuerier(object):
                 ScholarUtils.log('warn', 'could not load cookies file: %s' % msg)
                 self.cjar = MozillaCookieJar() # Just to be safe
 
-        self.opener = build_opener(HTTPCookieProcessor(self.cjar))
+        self.opener = build_opener()
         self.settings = None # Last settings object, if any
 
     def apply_settings(self, settings):
@@ -944,7 +943,7 @@ def json(querier, jsonp=None):
     if jsonp:
         print(encode(jsonp+'('+result+');'))
     else:
-        os_cmd = 'echo "' + str(encode(result)).replace("\n", " ").replace('\"', '\\"') + '" > A/' + str(int(round(time.time() * 1000))) + '.json'
+        os_cmd = 'echo "' + str(encode(result)).replace("\n", " ").replace('\"', '\\"') + '" > B/' + str(int(round(time.time() * 1000))) + '.json'
         print(os_cmd)
         os.popen(os_cmd)
         #print(encode(result))
