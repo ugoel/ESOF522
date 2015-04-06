@@ -170,10 +170,7 @@ class ScholarConf(object):
     LOG_LEVEL = 1
     MAX_PAGE_RESULTS = 20 # Current maximum for per-page results
     SCHOLAR_SITE = 'http://scholar.google.com'
-
-    # USER_AGENT = 'Mozilla/5.0 (X11; U; FreeBSD i386; en-US; rv:1.9.2.9) Gecko/20100913 Firefox/3.6.9'
-    # Let's update at this point (3/14):
-    USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.104 Safari/537.36'
+    USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36'
 
     # If set, we will use this file to read/save cookies to enable
     # cookie use across sessions.
@@ -904,7 +901,10 @@ class ScholarQuerier(object):
         try:
             ScholarUtils.log('info', 'requesting %s' % url)
 
-            req = Request(url=url, headers={'User-Agent': ScholarConf.USER_AGENT})
+            req = Request(url=url, headers={'User-Agent': ScholarConf.USER_AGENT, 'Pragma': 'no-cache', 'Accept-Language': 'en-US,en;q=0.8,hi;q=0.6', 'Accept-Encoding': 'gzip, deflate, sdch', 'Connection': 'keep-alive', 'Cache-Control': 'no-cache'})
+							#req.add_header('Pragma: no-cache')
+#req.add_header('Accept-Language: en-US,en;q=0.8,hi;q=0.6')
+#req.add_header('Accept-Encoding: gzip, deflate, sdch')
             hdl = self.opener.open(req)
             html = hdl.read()
 
@@ -943,7 +943,7 @@ def json(querier, jsonp=None):
     if jsonp:
         print(encode(jsonp+'('+result+');'))
     else:
-        os_cmd = 'echo "' + str(encode(result)).replace("\n", " ").replace('\"', '\\"') + '" > B/' + str(int(round(time.time() * 1000))) + '.json'
+        os_cmd = 'echo "' + str(encode(result)).replace("\n", " ").replace('\"', '\\"') + '" > C/' + str(int(round(time.time() * 1000))) + '.json'
         print(os_cmd)
         os.popen(os_cmd)
         #print(encode(result))
