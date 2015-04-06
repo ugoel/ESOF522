@@ -117,7 +117,7 @@ import re
 import time
 import math
 
-total_number_of_results = 400
+total_number_of_results = 1520
 conference_name = ""
 
 try:
@@ -170,7 +170,7 @@ class ScholarConf(object):
     LOG_LEVEL = 1
     MAX_PAGE_RESULTS = 20 # Current maximum for per-page results
     SCHOLAR_SITE = 'http://scholar.google.com'
-    USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36'
+    USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64; rv:27.0) Gecko/20100101 Firefox/27.0'
 
     # If set, we will use this file to read/save cookies to enable
     # cookie use across sessions.
@@ -315,7 +315,7 @@ class ScholarArticleParser(object):
         num_of_results_start_index = str(self.soup).find('<div id="gs_ab_md">') + 19
         num_of_results_end_index = str(self.soup).find('</div>', str(self.soup).find('<div id="gs_ab_md">') + 19)
         global total_number_of_results
-        total_number_of_results = int(re.search(r"[0-9]*", re.search(r"[0-9]* result", str(self.soup)[num_of_results_start_index:num_of_results_end_index]).group(0)).group(0))
+        total_number_of_results = int(re.search(r"[0-9]*", re.search(r"[0-9]* result", re.sub(",", "", str(self.soup)[num_of_results_start_index:num_of_results_end_index])).group(0)).group(0))
         for div in self.soup.findAll(ScholarArticleParser._tag_checker):
             self._parse_article(div)
             self._clean_article()
@@ -901,10 +901,7 @@ class ScholarQuerier(object):
         try:
             ScholarUtils.log('info', 'requesting %s' % url)
 
-            req = Request(url=url, headers={'User-Agent': ScholarConf.USER_AGENT, 'Pragma': 'no-cache', 'Accept-Language': 'en-US,en;q=0.8,hi;q=0.6', 'Accept-Encoding': 'gzip, deflate, sdch', 'Connection': 'keep-alive', 'Cache-Control': 'no-cache'})
-							#req.add_header('Pragma: no-cache')
-#req.add_header('Accept-Language: en-US,en;q=0.8,hi;q=0.6')
-#req.add_header('Accept-Encoding: gzip, deflate, sdch')
+            req = Request(url=url, headers={'User-Agent': ScholarConf.USER_AGENT, 'Accept-Language': 'en-US,en;q=0.8,hi;q=0.6', 'Connection': 'keep-alive', 'Cookie': 'GSP=ID=9046fcddbc3727f0:LM=1428354242:S=cbvuJiUOSiKvS4v5; PREF=ID=9046fcddbc3727f0:TM=1428354242:LM=1428354242:S=jXGUPpNOSO2umXgA; GOOGLE_ABUSE_EXEMPTION=ID=ae09fe2169b0519c:TM=1428354257:C=c:IP=153.90.50.129-:S=APGng0s-XQPY0Wtg6gJ2YRdQhE69T2887A'})
             hdl = self.opener.open(req)
             html = hdl.read()
 
@@ -943,7 +940,7 @@ def json(querier, jsonp=None):
     if jsonp:
         print(encode(jsonp+'('+result+');'))
     else:
-        os_cmd = 'echo "' + str(encode(result)).replace("\n", " ").replace('\"', '\\"') + '" > C/' + str(int(round(time.time() * 1000))) + '.json'
+        os_cmd = 'echo "' + str(encode(result)).replace("\n", " ").replace('\"', '\\"') + '" > B/' + str(int(round(time.time() * 1000))) + '.json'
         print(os_cmd)
         os.popen(os_cmd)
         #print(encode(result))
