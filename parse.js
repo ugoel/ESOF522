@@ -1,6 +1,6 @@
 var fs = require('fs');
 var http = require('http');
-var dir = "C/";
+var dir = "C/new/";
 var conf_rank = "C";
 
 fs.readdir(dir, function (err, files) {

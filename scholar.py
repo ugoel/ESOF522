@@ -901,7 +901,7 @@ class ScholarQuerier(object):
         try:
             ScholarUtils.log('info', 'requesting %s' % url)
 
-            req = Request(url=url, headers={'User-Agent': ScholarConf.USER_AGENT, 'Accept-Language': 'en-US,en;q=0.8,hi;q=0.6', 'Connection': 'keep-alive', 'Cookie': 'GSP=ID=9046fcddbc3727f0:LM=1428354242:S=cbvuJiUOSiKvS4v5; PREF=ID=9046fcddbc3727f0:TM=1428354242:LM=1428354242:S=jXGUPpNOSO2umXgA; GOOGLE_ABUSE_EXEMPTION=ID=ae09fe2169b0519c:TM=1428354257:C=c:IP=153.90.50.129-:S=APGng0s-XQPY0Wtg6gJ2YRdQhE69T2887A'})
+            req = Request(url=url, headers={'User-Agent': ScholarConf.USER_AGENT, 'Accept-Language': 'en-US,en;q=0.8,hi;q=0.6', 'Connection': 'keep-alive', 'Cookie': 'GSP=ID=0120684a980fc8e2:LM=1428431598:S=Sm1fo95Yyx0qyBnb; PREF=ID=0120684a980fc8e2:TM=1428431598:LM=1428431598:S=45pLqhcHL9OWSE8Z; GOOGLE_ABUSE_EXEMPTION=ID=58704704aebc3874:TM=1428431614:C=c:IP=153.90.50.129-:S=APGng0syun9K3RHpPdJ3nUoX0aLPyKNmlA'})
             hdl = self.opener.open(req)
             html = hdl.read()
 
@@ -940,7 +940,7 @@ def json(querier, jsonp=None):
     if jsonp:
         print(encode(jsonp+'('+result+');'))
     else:
-        os_cmd = 'echo "' + str(encode(result)).replace("\n", " ").replace('\"', '\\"') + '" > B/' + str(int(round(time.time() * 1000))) + '.json'
+        os_cmd = 'echo "' + str(encode(result)).replace("\n", " ").replace('\"', '\\"') + '" > B/new/' + str(int(round(time.time() * 1000))) + '.json'
         print(os_cmd)
         os.popen(os_cmd)
         #print(encode(result))
