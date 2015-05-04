@@ -2,12 +2,10 @@ citation<-c(75.2158,60.9267,72.7302,67.2484,71.8182,64.5217,22.5360,14.2080,7.39
 
 acc_rate<-c(11.3,11.9,12.4,12.9,15.4,15.6,15.8,15.8,16.5,16.7,17.1,17.5,17.6,17.7,17.7,17.9,17.9,18.0,18.1,18.6,18.8,20.9,22.1,22.3,22.5,22.6,22.6,23.1,23.1,23.5,23.7,24.5,25.0,25.3,25.9,26.3,26.3,27.7,28.4,28.4,28.8,29.0,29.4,31.5,31.8,32.0,32.0,32.3,32.8,32.9,34.4,35.3,36.0,36.2,36.4,36.4,36.9,36.9,41.8,42.0,48.2,48.5,51.9)
 
-library(lattice)
+par(mar=c(2.6, 3.1, 1, 0.3))
+plot(acc_rate, citation, xaxt='n', xlim=c(0, 55), ylim=c(0,100))
+lines(lowess(acc_rate, citation), col="blue")
+axis(side =1, mgp = c(3, 0.5, 0))
+mtext(side = 1, text = "Conference Acceptance Rate (%)", line = 1.5)
+mtext(side = 2, text = "Average Citation Count", line = 2)
 
-panel_fn <- function(x, y, ...)
-{
-    panel.xyplot(x, y)
-    panel.xyplot(x, y, type="smooth", col="red")
-}
-
-xyplot(citation ~ acc_rate, panel=panel_fn, , xlab="Acceptance Rate (%)", ylab="Average Citations")

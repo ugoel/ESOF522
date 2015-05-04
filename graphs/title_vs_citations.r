@@ -9,8 +9,10 @@ mobile<-c(9.0000,7.2500,12.0000,7.6573,54.0714,18.2857,2.5000,7.4167,16.6000,4.0
 performance<-c(10.5000,14.2500,106.8889,16.1034,5.9455,14.2500,25.1364,15.0938,5.8095,43.1667,2.7500,10.6000,21.0000,12.5556,6.3696,67.3077,7.3127,6.0882,4.2857,10.7703,4.3902,13.0625,43.7500,16.4348,26.8000,45.2000,37.3721,2.6087,20.3505,5.0645,17.2857,5.5362,14.1600,47.4000,13.6667,3.0000,98.5000,8.5652,94.0000,6.4545,63.5556,10.4000,21.4000,12.6667,18.0000,6.5000,10.0000,5.4800,17.8462,15.5000,76.9200,19.5333,9.2415,7.3842,4.7222,3.9706,5.2727,7.8800,6.7273,65.4000)
 
 
-par(mar=c(2.4, 2.9, 0.1, 0.1))
-boxplot(cloud, distributed, security, mobile, performance, at=c(1, 2, 3, 4, 5), outline=FALSE, xaxt='n')
-axis(side=1, at=c(1, 2, 3, 4, 5), labels=c("Cloud", "Distributed", "Security", "Mobile", "Performance"), mgp = c(3, 0.5, 0))
-mtext(side = 1, text = "Choice of Keywords in Title", line = 1.5)
-mtext(side = 2, text = "Average Citations", line = 2)
+par(mar=c(2.6, 3.1, 1, 0.3))
+boxplot(cloud, distributed, security, mobile, performance, at=c(1, 2, 3, 4, 5), outline=FALSE, xaxt='n', boxwex=0.4)
+axis(side=1, at=c(1, 2, 3, 4, 5), labels=c("Key A", "Key B", "Key C", "Key D", "Key E"), mgp = c(3, 0.5, 0))
+mtext(side = 1, text = "Choice of Keyword in paper Title", line = 1.5)
+mtext(side = 2, text = "Average Citation Count", line = 2)
+
+=c("Cloud", "Distributed", "Security", "Mobile", "Performance")
